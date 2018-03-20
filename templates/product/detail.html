@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}  {% endblock %}
+
+{% block content %}
+
+
+<h1>{{ product.name }}</h1>
+{{ product.category }}
+<p>Rs {{ product.price }}</p>
+
+<form action="{% url "product:cart_add" product.id %}" method="post">
+	{{ cart_product_form }}
+	{% csrf_token %}
+	<input  type="submit" value="Add to cart" class="btn">
+</form>
+{{ product.description|linebreaks }}
+{% endblock %}

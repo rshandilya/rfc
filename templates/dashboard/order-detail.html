@@ -1,0 +1,36 @@
+{% extends "dashboard/dashboard_base.html" %}
+{% load static %}
+{% block title %}
+RFC Fruits
+{% endblock %}
+
+{% block dashboard_content %}
+<h3>Oder Details</h3>
+<h4>Customer</h4>
+<ul>
+<li> NAME:  {{ order.customer.name}} </li>
+<li>  PHONE NUMBER: {{ order.customer.phone_number}} </li>
+<li> ADDRESS: {{ order.customer.address}}</li>
+</ul>
+<h4>items</h4>
+<table>
+
+
+<thead>
+	<th>Product</th>
+	<th>Cost</th>
+	<th>Quantity</th>
+</thead>
+<tbody>
+{% for item in order.items.all %}
+<tr>
+<td> {{item.product}} </td>
+<td> {{item.price}} </td>
+ <td> {{item.quantity}} </td>
+</tr>
+{% endfor %}
+</table>
+<h4>Payment Detail</h4>
+Total Cost: {{order.get_total_cost}} 
+Paid Amount: {{order.paid_amount}}
+{% endblock %}

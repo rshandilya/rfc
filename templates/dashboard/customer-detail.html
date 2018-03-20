@@ -1,0 +1,38 @@
+{% extends "dashboard/dashboard_base.html" %}
+{% load static %}
+{% block title %}
+RFC Fruits
+{% endblock %}
+
+{% block dashboard_content %}
+ <h3>customer detail</h3>
+ <ul>
+ <li> NAME : {{customer.name}}</li>
+ <li>PHONE NUMBER: {{customer.phone_number}}</li>
+<li>ADDRESS: {{customer.address}}</li>
+</ul>
+<h3>orders history</h4>
+<table>
+<thead>
+	<th>Order Number</th>
+	<th> Date</th>
+	<th> Payment Status</th>
+</thead>
+
+
+{% for order in orders %}
+<tr>
+<td>
+<a href="{% url 'dashboard:order_detail' order.id %}">{{ order.id}}</a> 
+</td> 
+<td>
+ {{order.created}}
+</td>
+ <td>
+{% if order.is_unpaid %}UNPAID {% else %} CLEAR {% endif %}
+</td>
+
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+RFC Fruits
+{% endblock %}
+
+{% block content %}
+<h1>Dashboard</h1>
+<h2>Manage</h2>
+<a href="{%url 'dashboard:dashboard' %}">ORDERS</a><br>
+<a href="">unpaid orders</a><br>
+<a href="">CUSTOMER</a><br>
+<a href="">unpaid Customer</a><br>
+<a href="">Most Frequent</a><br>
+<a href="">Expenditure</a><br>
+
+
+{% block dashboard_content %}
+{% endblock %}
+{% endblock %}

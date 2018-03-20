@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+   Order Payment
+{% endblock %}
+{% block content %}
+<h1>Order</h1>
+<h2>Cart</h2>
+<table>
+	<thead>
+		<tr>
+			<th>Product</th>
+			<th>Quantity</th>
+			<th>Unit price</th>
+			<th>Price</th>
+		</tr>
+	</thead>
+    <tbody>
+	{% for item in cart %}
+	{% with product=item.product %}
+	    <tr>
+			<td>{{ product.name }}</td>
+			<td>{{ item.quantity }}</td>
+			<td>${{ item.price }}</td>
+			<td>${{ item.total_price }}</td>
+		</tr>
+		{% endwith %}
+		{% endfor %}
+		<tr>
+			<td>Total</td>
+			<td></td>
+			<td>${{ cart.get_total_price }}</td>
+		</tr>
+    </tbody>
+</table>
+<h2>Customer</h2>
+<p>
+	<table>
+	<tbody>
+	<tr>
+	<td> Name : </td> <td> {{ customer.name }}  </td>
+	</tr>
+	<tr>
+	<td>Phone Number:</td> <td> {{ customer.phone_number }}</td>
+	</tr>
+	<tr>
+	<td> Address:</td> <td>{{ customer.address }}</td>
+	</tr>
+	</tbody>
+	</table>
+</p>
+
+<h2>Amount Paying </h2>
+<form action="{% url 'order:paying-amount' %}" method="get">
+		    <p><label for="id_amount">Amount:</label> 
+			<input type="text" name="amount" maxlength="5" required id="id_amount" /></p>			
+		    <input type="submit" value="Add" class="btn">
+</form>
+
+{% endblock %}

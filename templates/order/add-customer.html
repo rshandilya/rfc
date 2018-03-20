@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    Cart Customer
+{% endblock %}
+{% block content %}
+<h2>Place Order</h2>
+<table>
+	<thead>
+		<tr>
+			<th>Product</th>
+			<th>Quantity</th>
+			<th>Unit price</th>
+			<th>Price</th>
+		</tr>
+	</thead>
+    <tbody>
+	{% for item in cart %}
+	{% with product=item.product %}
+	    <tr>
+			<td>{{ product.name }}</td>
+			<td>{{ item.quantity }}</td>
+			<td>${{ item.price }}</td>
+			<td>${{ item.total_price }}</td>
+		</tr>
+		{% endwith %}
+		{% endfor %}
+		<tr>
+			<td><b> Total</b></td>
+			<td></td>
+			<td><b>${{ cart.get_total_price }}</b></td>
+		</tr>
+    </tbody>
+</table>
+
+<p> 
+ <h4>Find Customer</h4>
+
+<form action="{% url 'order:register-customer' %}" method="get">
+		    <p><label for="id_phone">Phone Number:</label> 
+			<input type="text" name="phone" maxlength="10" required id="id_phone" /></p>			
+		    <input type="submit" value="Find" class="btn">
+</form>
+</p>
+
+
+<p>
+ <h4>New Customer</h4>
+	<form action="{% url 'order:register-customer' %}" method="post">
+			{{ form.as_p }}		
+			<input type="submit" value="Register" class="btn">
+			{% csrf_token %}
+	</form>
+</p>
+
+{% endblock %}
